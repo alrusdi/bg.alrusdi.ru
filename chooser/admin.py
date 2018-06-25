@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.db.models import F
 from django.contrib import admin
 
 from chooser.models import Game, Play
@@ -12,6 +13,13 @@ class GameAdmin(admin.ModelAdmin):
 
 
 @admin.register(Play)
-class GameAdmin(admin.ModelAdmin):
+class PlayAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'mode', 'played_at']
     list_filter = ['mode']
+
+    def save_model(self, request, obj, form, change):
+        if not obj.pk:
+            f = 'total_rejects' if obj.mode == 'REJECTED' else 'total_plays'
+            data = {f: F(f) + 1}
+            Game.objects.filter(pk=obj.game_id).update(**data)
+        return super(PlayAdmin, self).save_model(request, obj, form, change)

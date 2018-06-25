@@ -11,3 +11,22 @@
 .daction {
     width: 20px;
 }
+
+.msg {
+    background: #afa;
+    padding: 7px;
+    border: 1px solid #a0e3a0;
+}
+
+.cont {
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid #bababa;
+    border-radius: 10px;
+    background: #ebebeb;
+    padding: 15px;
+}
+
+h3 {
+    margin: 0 0 7px 0;
+}

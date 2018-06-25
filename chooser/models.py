@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 from django.db import models
 
 
@@ -48,9 +49,15 @@ class Play(models.Model):
             ('REJECTED', 'Отказ'),
         )
     )
-    played_at = models.DateTimeField(
-        auto_now_add=True
+    played_at = models.DateField(
+        default=datetime.date.today
     )
+
+    def save(self, *args, **kwargs):
+        ''' On save, update played_at '''
+        if not self.id:
+            self.played_at = datetime.date.today()
+        return super(Play, self).save(*args, **kwargs)
 
     def __str__(self):
         return 'Play id=%s of «%s»' % (self.pk, self.game.title)

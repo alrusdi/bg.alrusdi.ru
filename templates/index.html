@@ -2,27 +2,29 @@
 
 {% block content %}
     <div id="app" v-cloak>
-        <div v-if="choosen_game">
-            <h3>[[ choosen_game.title ]]</h3>
-            <button v-on:click="register_play()" :disabled="is_processing">Отлично. Играем!</button>&nbsp;&nbsp;
-            <button v-on:click="reject_play()"  :disabled="is_processing">Нет, давай в другое!</button>&nbsp;&nbsp;
-            <button v-on:click="choose_game()"  :disabled="is_processing">ZZZ!</button>
-        </div>
-        <div v-else="game_selection_enabled" style="max-width: 600px;">
-            <h3>Пришло время во что-нибудь поиграть</h3>
-            <div class="msg">[[ message ]]</div>
-            <div>
+        <div class="cont">
+            <div v-if="choosen_game">
+                <h3>[[ choosen_game.title ]]</h3>
+                <button v-on:click="register_play()" :disabled="is_processing">Отлично. Играем!</button>&nbsp;&nbsp;
+                <button v-on:click="reject_play()"  :disabled="is_processing">Нет, давай в другое!</button>&nbsp;&nbsp;
+                <button v-on:click="choose_game(true)"  :disabled="is_processing">ZZZ!</button>
+            </div>
+            <div v-else>
+                <div class="msg" v-if="message">[[ message ]]</div>
+                <h3>Пришло время во что-нибудь поиграть</h3>
                 <div>
-                  <div class="dtitle">Включить цифровые игры?</div>
-                  <div class="daction"><input type="checkbox" v-model="is_digital" /></div>
-                </div>
-                <div>
-                  <div class="dtitle">Включить реальные игры?</div>
-                  <div class="daction"><input type="checkbox" v-model="is_real" /></div>
-                </div>
+                    <div>
+                      <div class="dtitle">Включить цифровые игры?</div>
+                      <div class="daction"><input type="checkbox" v-model="is_digital" /></div>
+                    </div>
+                    <div>
+                      <div class="dtitle">Включить реальные игры?</div>
+                      <div class="daction"><input type="checkbox" v-model="is_real" /></div>
+                    </div>
 
-                <div class="submit_container">
-                    <button v-on:click="choose_game()" :disabled="is_processing">Поехали!</button>
+                    <div class="submit_container">
+                        <button v-on:click="choose_game()" :disabled="is_processing">Поехали!</button>
+                    </div>
                 </div>
             </div>
         </div>
