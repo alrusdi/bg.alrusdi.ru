@@ -29,13 +29,20 @@ var app = new Vue({
                 });
         },
 
-        register_play: function () {
+        register_play: function (force_game_id) {
             var vue_app = this;
-            axios.post('/register-play/', {'game_id': vue_app.choosen_game.id})
+            var game_id = force_game_id | vue_app.choosen_game.id;
+            vue_app.is_processing = true;
+            axios.post('/register-play/', {'game_id': game_id})
                 .then(function (response) {
                     vue_app.message = "Ok! Игра «"+vue_app.choosen_game.title+"» записана.";
                     vue_app.choosen_game = false;
                     vue_app.is_processing = false;
+
+                    if (force_game_id) {
+                        var el = document.getElementById("game-count-"+game_id);
+                        if (el) el.innerHTML = response.data.result;
+                    }
                 })
                 .catch(function (error) {
                     vue_app.is_processing = false;

@@ -24,6 +24,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     path('', login_required(views.Index.as_view())),
+    path('games/', login_required(views.GamesList.as_view())),
     path('choose-game/', csrf_exempt(login_required(views.ChooseGame.as_view()))),
     path('register-play/', csrf_exempt(login_required(views.RegisterPlay.as_view()))),
     path('reject-play/', csrf_exempt(login_required(views.RejectPlay.as_view()))),

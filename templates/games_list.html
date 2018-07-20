@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div id="app" class="games_list" v-cloak="">
+        <div class="top_links">
+            <a href="/admin/">админка</a> | <a href="/">главная</a>
+        </div>
+        <div class="cont">
+            {% for game in games %}
+            <div class="game">
+                {% comment %}
+                <div class="game-cell game--image">
+                    {% if game.cover %}
+                        X
+                    {% endif %}
+                </div>
+                {% endcomment %}
+                <div class="game-cell game--title">
+                    <a href="/admin/chooser/game/{{ game.id }}/change/">{{ game.title }}</a>
+                </div>
+                <div class="game-cell game--actions">
+                    <button v-on:click="register_play({{ game.id }})" :disabled="is_processing">+</button>
+                </div>
+                <div class="game-cell game--count" id="game-count-{{ game.id }}">
+                    {{ game.total_count }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+<script src="/static/js/app.js"></script>
+{% endblock %}

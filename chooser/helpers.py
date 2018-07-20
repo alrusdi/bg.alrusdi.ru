@@ -25,7 +25,9 @@ def register_play(game_id):
 
     Game.objects.filter(pk=game_id).update(total_plays=F('total_plays') + 1)
 
-    return True
+    game.refresh_from_db()
+
+    return game.total_count()
 
 
 def reject_play(game_id):

@@ -11,6 +11,7 @@ class Game(models.Model):
         null=True, blank=True
     )
     cover = models.ImageField(
+        upload_to="media/covers",
         null=True, blank=True
     )
     is_excluded = models.BooleanField(
@@ -31,6 +32,9 @@ class Game(models.Model):
     total_rejects = models.IntegerField(
         default=0
     )
+
+    def total_count(self):
+        return self.total_plays + self.total_rejects
 
     def __str__(self):
         return self.title

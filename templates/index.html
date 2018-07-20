@@ -2,6 +2,9 @@
 
 {% block content %}
     <div id="app" v-cloak>
+        <div class="top_links">
+            <a href="/admin/">админка</a> | <a href="/games/">игры</a>
+        </div>
         <div class="cont">
             <div v-if="choosen_game">
                 <h3>[[ choosen_game.title ]]</h3>
