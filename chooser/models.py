@@ -39,6 +39,9 @@ class Game(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = ['title']
+
 
 class Play(models.Model):
     game = models.ForeignKey(
